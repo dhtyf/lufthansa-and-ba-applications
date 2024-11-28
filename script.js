@@ -1,36 +1,66 @@
 // Initialize Bootstrap components
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize tooltips
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+    });
+
+    // Add event listener to the application form
+    const applicationForm = document.getElementById('applicationForm');
+    if (applicationForm) {
+        applicationForm.addEventListener('submit', handleApplicationSubmit);
+    }
 });
 
-// Handle application form display
+// Show application form for specific role
 function showApplicationForm(role) {
-    const modal = new bootstrap.Modal(document.getElementById('applicationModal'));
-    document.getElementById('jobRole').value = role;
-    
-    // Update modal title based on role
-    const modalTitle = document.querySelector('.modal-title');
-    modalTitle.textContent = `${role.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} Application`;
-    
+    const modalElement = document.getElementById('applicationModal');
+    if (!modalElement) return;
+
+    const modal = new bootstrap.Modal(modalElement);
+    const jobRoleInput = document.getElementById('jobRole');
+    if (jobRoleInput) {
+        jobRoleInput.value = role;
+    }
+
+    // Update modal title
+    const modalTitle = modalElement.querySelector('.modal-title');
+    if (modalTitle) {
+        modalTitle.textContent = `${role.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} Application`;
+    }
+
     modal.show();
 }
 
 // Handle form submission
-function submitApplication(event) {
+function handleApplicationSubmit(event) {
     event.preventDefault();
     
-    // Get form data
-    const formData = new FormData(document.getElementById('applicationForm'));
-    const jobRole = formData.get('jobRole');
-    const discordUsername = formData.get('discordUsername');
-    const experience = formData.get('experience');
-    const timezone = formData.get('timezone');
-    const motivation = formData.get('motivation');
-    
-    // Prepare email content
+    // Get form values directly
+    const jobRole = document.getElementById('jobRole').value;
+    const discordUsername = document.getElementById('discordUsername').value;
+    const experience = document.getElementById('experience').value;
+    const timezone = document.getElementById('timezone').value;
+    const motivation = document.getElementById('motivation').value;
+
+    // Basic validation
+    if (!discordUsername || !experience || !timezone || !motivation) {
+        alert('Please fill in all required fields');
+        return;
+    }
+
+    // Close modal first
+    const modalElement = document.getElementById('applicationModal');
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    if (modal) {
+        modal.hide();
+    }
+
+    // Reset form
+    event.target.reset();
+
+    // Create email content
     const subject = `New ${jobRole.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} Application`;
     const body = `
 Job Role: ${jobRole}
@@ -39,20 +69,15 @@ Experience: ${experience}
 Timezone: ${timezone}
 Motivation: ${motivation}
     `.trim();
+
+    // Create and open mailto link
+    const email = 'lufthansaxbaapply@gmail.com';
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
-    // Create mailto link
-    const mailtoLink = `mailto:lufthansaxbaapply@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
-    
-    // Close modal and reset form
-    const modal = bootstrap.Modal.getInstance(document.getElementById('applicationModal'));
-    modal.hide();
-    document.getElementById('applicationForm').reset();
-    
-    // Show success message
-    alert('Thank you for your application! Your email client should now open to send your application.');
+    // Use a small delay to ensure modal is closed first
+    requestAnimationFrame(() => {
+        location.href = mailtoLink;
+    });
 }
 
 // Smooth scrolling for navigation links
