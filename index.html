@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BA & Lufthansa Base Airport Career Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">BA & Lufthansa Careers</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>Welcome to BA & Lufthansa Base Airport</h1>
+                    <p class="lead">Join our prestigious virtual aviation team and start your journey in the world of professional aviation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Opportunities -->
+    <section id="careers" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Career Opportunities</h2>
+            <div class="row g-4">
+                <!-- Pilot Card -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Pilot</h5>
+                            <p class="card-text">Join our elite flight crew and take command of our aircraft fleet.</p>
+                            <button class="btn btn-primary" onclick="showApplicationForm('pilot')">Start Application</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cabin Crew Card -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Cabin Crew</h5>
+                            <p class="card-text">Deliver exceptional service and ensure passenger safety.</p>
+                            <button class="btn btn-primary" onclick="showApplicationForm('cabin-crew')">Start Application</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Security Card -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Security</h5>
+                            <p class="card-text">Maintain safety and security throughout our airport operations.</p>
+                            <button class="btn btn-primary" onclick="showApplicationForm('security')">Start Application</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ground Crew Card -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Ground Crew</h5>
+                            <p class="card-text">Handle aircraft servicing and ground operations.</p>
+                            <button class="btn btn-primary" onclick="showApplicationForm('ground-crew')">Start Application</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Airport Staff Card -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Airport Staff</h5>
+                            <p class="card-text">Join our terminal operations and passenger services team.</p>
+                            <button class="btn btn-primary" onclick="showApplicationForm('airport-staff')">Start Application</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Modal -->
+    <div class="modal fade" id="applicationModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Application Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="applicationForm" onsubmit="submitApplication(event)">
+                        <input type="hidden" id="jobRole" name="jobRole">
+                        <div class="mb-3">
+                            <label for="discordUsername" class="form-label">Discord Username</label>
+                            <input type="text" class="form-control" id="discordUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="experience" class="form-label">Experience</label>
+                            <textarea class="form-control" id="experience" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="timezone" class="form-label">Timezone</label>
+                            <input type="text" class="form-control" id="timezone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="motivation" class="form-label">Motivation</label>
+                            <textarea class="form-control" id="motivation" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-4">About Us</h2>
+            <div class="row">
+                <div class="col-12">
+                    <p>BA & Lufthansa Base Airport is a premier virtual aviation environment within Roblox, dedicated to providing realistic aviation experiences and career opportunities. Our mission is to create an immersive and professional atmosphere where aviation enthusiasts can develop their skills and contribute to a dynamic virtual airline community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 BA & Lufthansa Base Airport. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="#" class="text-light me-3">Privacy Policy</a>
+                    <a href="#" class="text-light me-3">Terms of Service</a>
+                    <a href="#about" class="text-light">About Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
